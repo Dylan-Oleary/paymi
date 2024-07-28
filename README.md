@@ -1,15 +1,33 @@
-# fundr
+# Paymi
 
-To install dependencies:
+Budgets? Assets? Who knows, but it's a 5 letter name with wordplay so it's definitely a tech product.
+
+## Project Setup
+
+### Node
+
+This project uses [Node.js v22.5.1](https://nodejs.org/en). To set your local version of Node, run the following command.
 
 ```bash
-bun install
+nvm use
 ```
 
-To run:
+### pnpm
+
+This project uses [pnpm](https://pnpm.io/) for workspace and dependency management. In this project, pnpm is managed via [corepack](https://nodejs.org/api/corepack.html). To enable corepack, run the following command.
 
 ```bash
-bun run index.ts
+corepack enable
 ```
 
-This project was created using `bun init` in bun v1.1.21. [Bun](https://bun.sh) is a fast all-in-one JavaScript runtime.
+Once corepack is enabled, run the following command to initialize the workspace and install all of its dependencies.
+
+```bash
+pnpm install
+```
+
+### Supabase
+
+This project uses [Supabase](https://supabase.com/) to manage common backend services such as authentication and database management.
+
+To setup and run Supabase, follow the [@paymi/supbase](./services/supabase/README.md) setup guide.

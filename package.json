@@ -1,11 +1,28 @@
 {
-  "name": "fundr",
-  "module": "index.ts",
-  "type": "module",
-  "devDependencies": {
-    "@types/bun": "latest"
+  "name": "paymi",
+  "scripts": {
+    "dev:web": "pnpm --filter @paymi/web run dev",
+    "dev:supabase:start": "pnpm --filter @paymi/supabase start",
+    "dev:supabase:stop": "pnpm --filter @paymi/supabase stop",
+    "format:check": "pnpm --recursive run format:check",
+    "format:write": "pnpm --recursive run format:write",
+    "lint:check": "pnpm --recursive run lint:check"
   },
-  "peerDependencies": {
-    "typescript": "^5.0.0"
-  }
+  "engines": {
+    "node": "22.5.1",
+    "pnpm": "^9.6.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.12",
+    "@typescript-eslint/eslint-plugin": "^7.17.0",
+    "@typescript-eslint/parser": "^7.17.0",
+    "eslint": "^8.38.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-import-resolver-typescript": "^3.6.1",
+    "eslint-plugin-import": "^2.29.1",
+    "eslint-plugin-prettier": "^5.2.1",
+    "prettier": "^3.3.3",
+    "typescript": "^5.5.4"
+  },
+  "packageManager": "pnpm@9.6.0+sha512.38dc6fba8dba35b39340b9700112c2fe1e12f10b17134715a4aa98ccf7bb035e76fd981cf0bb384dfa98f8d6af5481c2bef2f4266a24bfa20c34eb7147ce0b5e"
 }

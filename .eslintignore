@@ -1,0 +1,28 @@
+# Build 
+dist/
+build/
+coverage/
+
+# Cache
+.cache/
+.tmp/
+
+# Dependencies
+node_modules
+
+# Docker
+Dockerfile
+Dockerfile.*
+
+# Environment variables
+.env
+.env.*
+!.env.sample
+
+# Logs
+logs/
+*.log
+
+# OS specific files
+.DS_Store
+Thumbs.db
