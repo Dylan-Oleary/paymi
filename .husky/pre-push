@@ -1,1 +1,3 @@
-echp "push it to the limit"
+#!/bin/sh
+
+echo "push it to the limit"
