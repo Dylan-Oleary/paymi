@@ -1,12 +1,12 @@
 {
   "name": "paymi",
   "scripts": {
-    "dev:web": "pnpm --filter @paymi/web run dev",
+    "dev:web": "pnpm --filter @paymi/web dev",
     "dev:supabase:start": "pnpm --filter @paymi/supabase start",
     "dev:supabase:stop": "pnpm --filter @paymi/supabase stop",
-    "format:check": "pnpm --recursive run format:check",
-    "format:write": "pnpm --recursive run format:write",
-    "lint:check": "pnpm --recursive run lint:check",
+    "format:check": "pnpm --recursive format:check",
+    "format:write": "pnpm --recursive format:write",
+    "lint:check": "pnpm --recursive lint:check",
     "prepare": "husky"
   },
   "engines": {
@@ -23,6 +23,7 @@
     "eslint-plugin-import": "^2.29.1",
     "eslint-plugin-prettier": "^5.2.1",
     "husky": "^9.1.3",
+    "lint-staged": "^15.2.7",
     "prettier": "^3.3.3",
     "typescript": "^5.5.4"
   },
