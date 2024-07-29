@@ -8,5 +8,5 @@ export const meta: MetaFunction = () => {
 };
 
 export default function IndexPage() {
-  return <div className='font-sans p-4'>paymi</div>;
+  return <div className='font-sans p-4'>paymi app</div>;
 }
