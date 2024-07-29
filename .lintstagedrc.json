@@ -1,0 +1,10 @@
+{
+  "applications/web/**/*.{json,md,js,jsx,ts,tsx}": [
+    "pnpm --filter @paymi/web lint:check",
+    "pnpm --filter @paymi/web check:format"
+  ],
+  "services/supabase/**/*.{json,md,js,jsx,ts,tsx}": [
+    "pnpm --filter @paymi/supabase lint:check",
+    "pnpm --filter @paymi/supabase check:format"
+  ]
+}
