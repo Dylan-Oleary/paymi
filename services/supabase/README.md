@@ -28,6 +28,7 @@ This project uses Google OAuth for user authentication. Supabase relies on the f
 
 `SUPABASE_AUTH_EXTERNAL_GOOGLE_CLIENT_ID`  
 `SUPABASE_AUTH_EXTERNAL_GOOGLE_CLIENT_SECRET`  
+`SUPABASE_AUTH_SERVER_REDIRECT_URL`  
 `SUPABASE_WEB_APPLICATION_BASE_URL`  
 `SUPABASE_WEB_APPLICATION_REDIRECT_URL`
 
@@ -40,7 +41,7 @@ Follow the steps outlined in [Supabase – Login with Google](https://supabase.
 >
 > Add the value of `SUPABASE_WEB_APPLICATION_BASE_URL` as a record under 'Authorized Javascript origins'.
 >
-> Add `http://127.0.0.1:54321/auth/v1/callback` as a record under
+> Add the value of `SUPABASE_AUTH_SERVER_REDIRECT_URL` as a record under
 > 'Authorized redirect URIs'. This value is the Supabase endpoint that Google will redirect to after authentication.
 
 ## Running Supabase
