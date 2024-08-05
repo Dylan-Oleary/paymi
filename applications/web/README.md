@@ -6,14 +6,6 @@ This package contains the Paymi web application. This application uses [Remix](h
 
 ### Environment variables
 
-Create a `.env.` file to store environment variables that will be passed to the application. From the `~/applications/web` directory, run the following command.
-
-```bash
-touch .env
-```
-
-Paste the `.env.sample` file into your `.env` file and update the values accordingly.
-
 For environment variables prefixed with `SUPBASE_`, refer to the output of the command `pnpm dev:supabase:start`.
 
 ```bash
