@@ -7,5 +7,5 @@ export const action = async ({ request }: LoaderFunctionArgs) => {
 
   await supabase.auth.signOut({ scope: 'local' });
 
-  return redirect('/');
+  return redirect('/login', { headers });
 };
