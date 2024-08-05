@@ -6,10 +6,11 @@
     "format:check": "prettier . --check --ignore-path ./../../.prettierignore",
     "format:write": "prettier . --write --ignore-path ./../../.prettierignore",
     "lint:check": "eslint .",
-    "start": "supabase start",
-    "stop": "supabase stop"
+    "start": "dotenv -e ./../../.env supabase start",
+    "stop": "dotenv -e ./../../.env supabase stop"
   },
   "dependencies": {
+    "@supabase/ssr": "^0.4.0",
     "@supabase/supabase-js": "^2.44.4"
   }
 }

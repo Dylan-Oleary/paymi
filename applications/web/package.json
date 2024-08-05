@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "build": "remix vite:build",
-    "dev": "remix vite:dev",
+    "dev": "dotenv -e ./../../.env remix vite:dev",
     "format:check": "prettier . --check --ignore-path ./../../.prettierignore",
     "format:write": "prettier . --write --ignore-path ./../../.prettierignore",
     "lint:check": "eslint .",
