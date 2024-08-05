@@ -22,6 +22,28 @@ In order to control Supabase, you'll need to download the [Supabase CLI](https:/
 > supabase --help
 > ```
 
+### Environment variables
+
+This project uses Google OAuth for user authentication. Supabase relies on the following environment variables in order for Google OAuth to work as expected:
+
+`SUPABASE_AUTH_EXTERNAL_GOOGLE_CLIENT_ID`  
+`SUPABASE_AUTH_EXTERNAL_GOOGLE_CLIENT_SECRET`  
+`SUPABASE_AUTH_SERVER_REDIRECT_URL`  
+`SUPABASE_WEB_APPLICATION_BASE_URL`  
+`SUPABASE_WEB_APPLICATION_REDIRECT_URL`
+
+#### Google setup
+
+Follow the steps outlined in [Supabase – Login with Google](https://supabase.com/docs/guides/auth/social-login/auth-google?queryGroups=environment&environment=server&queryGroups=framework&framework=remix).
+
+> [!NOTE]
+> In Google Cloud, you'll be asked to add 'Authorized JavaScript origins' and 'Authorized redirect URIs'.
+>
+> Add the value of `SUPABASE_WEB_APPLICATION_BASE_URL` as a record under 'Authorized Javascript origins'.
+>
+> Add the value of `SUPABASE_AUTH_SERVER_REDIRECT_URL` as a record under
+> 'Authorized redirect URIs'. This value is the Supabase endpoint that Google will redirect to after authentication.
+
 ## Running Supabase
 
 In order to start Supabase, run the following command.

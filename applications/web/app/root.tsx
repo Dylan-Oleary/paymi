@@ -4,8 +4,16 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
+  type MetaFunction,
 } from '@remix-run/react';
 import './tailwind.css';
+
+export const meta: MetaFunction = () => {
+  return [
+    { title: 'paymi' },
+    { name: 'description', content: "Yeah, it's a stupid name" },
+  ];
+};
 
 export function Layout({ children }: { children: React.ReactNode }) {
   return (

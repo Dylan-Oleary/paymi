@@ -31,3 +31,18 @@ pnpm install
 This project uses [Supabase](https://supabase.com/) to manage common backend services such as authentication and database management.
 
 To setup and run Supabase, follow the [@paymi/supbase](./services/supabase/README.md) setup guide.
+
+### Environment variables
+
+Create a `.env` file to store environment variables that will be passed to services and applications.
+
+```bash
+touch .env
+```
+
+Paste the `.env.sample` file into your `.env` file and update the values accordingly.
+
+> [!TIP]  
+> You'll notice that the `.env.sample` file is separated into `@paymi` projects existing in the repository.
+>
+> Refer to a project's `README.md` file for detailed information on how to populate its section of the `.env` file.
