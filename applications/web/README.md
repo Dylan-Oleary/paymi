@@ -37,7 +37,7 @@ S3 Region: local
 In your `.env` file, use the following values from the Supabase output.
 
 ```bash
-SUPABASE_CLIENT_API_KEY=anon key (Output -> anon key)
+SUPABASE_ANON_KEY=anon key (Output -> anon key)
 SUPABASE_URL=API URL (Output -> API_URL)
 ```
 
