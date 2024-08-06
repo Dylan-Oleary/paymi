@@ -1,1 +1,1 @@
-export type { User } from '@paymi/supabase';
+export type { User, UserMetadata } from '@paymi/supabase';

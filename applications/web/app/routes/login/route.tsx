@@ -9,13 +9,13 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
   const { data } = await supabase.auth.getUser();
 
   if (data.user) {
-    return redirect('/', { headers });
+    return redirect('/app', { headers });
   }
 
   return null;
 };
 
-export default function IndexPage() {
+export default function LoginPage() {
   return (
     <Form action='/auth/google' className='font-sans p-4' method='POST'>
       <button type='submit'>Login with Google</button>
