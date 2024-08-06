@@ -1,4 +1,4 @@
-import { useLocation } from '@remix-run/react';
+import { Link, useLocation } from '@remix-run/react';
 import { clsx } from 'clsx';
 import { type ReactNode, useState } from 'react';
 
@@ -74,21 +74,21 @@ export function Sidebar({ user }: SidebarProps): ReactNode {
                     <ul className='-mx-2 space-y-1'>
                       {navigation.map((item) => (
                         <li key={item.name}>
-                          <a
-                            href={item.href}
+                          <Link
                             className={clsx(
                               pathname.includes(item.href)
                                 ? 'bg-gray-800 text-white'
                                 : 'text-gray-400 hover:bg-gray-800 hover:text-white',
                               'group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6',
                             )}
+                            to={item.href}
                           >
                             <item.icon
                               aria-hidden='true'
                               className='h-6 w-6 shrink-0'
                             />
                             {item.name}
-                          </a>
+                          </Link>
                         </li>
                       ))}
                     </ul>
@@ -108,14 +108,14 @@ export function Sidebar({ user }: SidebarProps): ReactNode {
           <span className='sr-only'>Open sidebar</span>
           <Bars3Icon aria-hidden='true' className='h-6 w-6' />
         </button>
-        <a href='/app/profile'>
+        <Link to='/app/profile'>
           <span className='sr-only'>Your profile</span>
           <img
             alt='Your avatar'
             className='h-8 w-8 rounded-full bg-gray-800'
             src={user.avatarUrl}
           />
-        </a>
+        </Link>
       </div>
 
       {/* Desktop */}
@@ -152,9 +152,9 @@ export function Sidebar({ user }: SidebarProps): ReactNode {
                 </ul>
               </li>
               <li className='-mx-6 mt-auto'>
-                <a
+                <Link
                   className='flex items-center gap-x-4 px-6 py-3 text-sm font-semibold leading-6 text-white hover:bg-gray-800'
-                  href='/app/profile'
+                  to='/app/profile'
                 >
                   <img
                     alt='Your avatar'
@@ -163,7 +163,7 @@ export function Sidebar({ user }: SidebarProps): ReactNode {
                   />
                   <span className='sr-only'>Your profile</span>
                   <span aria-hidden='true'>{user.name}</span>
-                </a>
+                </Link>
               </li>
             </ul>
           </nav>
