@@ -1,9 +1,11 @@
 {
   "name": "paymi",
   "scripts": {
-    "dev:web": "pnpm --filter @paymi/web dev",
+    "dev:supabase:migration:new": "pnpm --filter @paymi/supabase migration:new",
+    "dev:supabase:reset": "pnpm --filter @paymi/supabase db:reset",
     "dev:supabase:start": "pnpm --filter @paymi/supabase start",
     "dev:supabase:stop": "pnpm --filter @paymi/supabase stop",
+    "dev:web": "pnpm --filter @paymi/web dev",
     "format:check": "pnpm --recursive format:check",
     "format:write": "pnpm --recursive format:write",
     "lint:check": "pnpm --recursive lint:check",
