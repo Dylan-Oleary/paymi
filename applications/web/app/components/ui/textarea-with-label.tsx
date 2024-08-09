@@ -9,7 +9,7 @@ export interface TextareaWithLabelProps extends TextareaProps {
   textareaClassName?: string;
 }
 
-export const InputWithLabel = forwardRef<
+export const TextareaWithLabel = forwardRef<
   HTMLTextAreaElement,
   TextareaWithLabelProps
 >(
@@ -29,4 +29,4 @@ export const InputWithLabel = forwardRef<
     );
   },
 );
-InputWithLabel.displayName = 'InputWithLabel';
+TextareaWithLabel.displayName = 'TextareaWithLabel';

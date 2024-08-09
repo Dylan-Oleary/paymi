@@ -8,7 +8,9 @@ import {
   CardContent,
   CardHeader,
   CardTitle,
+  Heading,
   InputWithLabel,
+  TextareaWithLabel,
 } from '~/components';
 
 import { getSupabaseServerClient } from '~/supabase';
@@ -66,6 +68,7 @@ export default function BudgetsPage(): ReactNode {
 
   return (
     <div>
+      <Heading level={1}>Budgets</Heading>
       <div className='grid grid-cols-3 gap-4'>
         {budgets.length > 0 ? (
           budgets.map((record) => (
@@ -94,12 +97,11 @@ export default function BudgetsPage(): ReactNode {
           name='name'
           type='text'
         />
-        <InputWithLabel
+        <TextareaWithLabel
           className='mt-4'
           id='description'
           label='Description'
           name='description'
-          type='text'
         />
         <Button className='mt-4' type='submit'>
           Submit
