@@ -1,5 +1,5 @@
 import { Form } from '@remix-run/react';
-import { clsx } from 'clsx';
+import { cn } from '~/utils';
 import type { ReactNode } from 'react';
 import { Button } from '~/components';
 
@@ -11,7 +11,7 @@ export function GoogleLoginForm({
   return (
     <Form
       action='/auth/google'
-      className={clsx('w-full', className)}
+      className={cn('w-full', className)}
       method='POST'
     >
       <Button className='w-full gap-3' variant='outline' type='submit'>

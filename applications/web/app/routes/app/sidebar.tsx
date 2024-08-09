@@ -1,5 +1,5 @@
 import { Link, useLocation } from '@remix-run/react';
-import { clsx } from 'clsx';
+import { cn } from '~/utils';
 import { type ReactNode, useState } from 'react';
 
 import {
@@ -16,6 +16,7 @@ import {
   XMarkIcon,
 } from '@heroicons/react/24/outline';
 import type { ClientUser } from '~/types';
+import { Button } from '~/components';
 
 const navigation = [
   { name: 'Dashboard', href: '/app', icon: HomeIcon },
@@ -49,7 +50,7 @@ export function Sidebar({ user }: SidebarProps): ReactNode {
           >
             <TransitionChild>
               <div className='absolute left-full top-0 flex w-16 justify-center pt-5 duration-300 ease-in-out data-[closed]:opacity-0'>
-                <button
+                <Button
                   className='-m-2.5 p-2.5'
                   onClick={() => setSidebarOpen(false)}
                   type='button'
@@ -59,7 +60,7 @@ export function Sidebar({ user }: SidebarProps): ReactNode {
                     aria-hidden='true'
                     className='h-6 w-6 text-white'
                   />
-                </button>
+                </Button>
               </div>
             </TransitionChild>
             <div className='flex grow flex-col gap-y-5 overflow-y-auto bg-gray-900 px-6 pb-2 ring-1 ring-white/10'>
@@ -75,8 +76,8 @@ export function Sidebar({ user }: SidebarProps): ReactNode {
                       {navigation.map((item) => (
                         <li key={item.name}>
                           <Link
-                            className={clsx(
-                              pathname.includes(item.href)
+                            className={cn(
+                              pathname === item.href
                                 ? 'bg-gray-800 text-white'
                                 : 'text-gray-400 hover:bg-gray-800 hover:text-white',
                               'group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6',
@@ -100,14 +101,14 @@ export function Sidebar({ user }: SidebarProps): ReactNode {
         </div>
       </Dialog>
       <div className='sticky top-0 z-40 flex items-center justify-between gap-x-6 bg-gray-900 px-4 py-4 shadow-sm sm:px-6 lg:hidden'>
-        <button
-          className='-m-2.5 p-2.5 text-gray-400 lg:hidden'
+        <Button
+          className='-m-2.5 p-2.5 lg:hidden'
           onClick={() => setSidebarOpen(true)}
           type='button'
         >
           <span className='sr-only'>Open sidebar</span>
           <Bars3Icon aria-hidden='true' className='h-6 w-6' />
-        </button>
+        </Button>
         <Link to='/app/profile'>
           <span className='sr-only'>Your profile</span>
           <img
@@ -133,8 +134,8 @@ export function Sidebar({ user }: SidebarProps): ReactNode {
                   {navigation.map((item) => (
                     <li key={item.name}>
                       <a
-                        className={clsx(
-                          pathname.includes(item.href)
+                        className={cn(
+                          pathname === item.href
                             ? 'bg-gray-800 text-white'
                             : 'text-gray-400 hover:bg-gray-800 hover:text-white',
                           'group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6',
