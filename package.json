@@ -9,7 +9,8 @@
     "format:check": "pnpm --recursive format:check",
     "format:write": "pnpm --recursive format:write",
     "lint:check": "pnpm --recursive lint:check",
-    "prepare": "husky"
+    "prepare": "husky",
+    "web:shadcn": "pnpm --filter @paymi/web shadcn"
   },
   "engines": {
     "node": "22.5.1",

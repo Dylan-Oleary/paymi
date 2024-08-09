@@ -1,6 +1,7 @@
 import { Form } from '@remix-run/react';
 import { clsx } from 'clsx';
 import type { ReactNode } from 'react';
+import { Button } from '~/components';
 
 export type GoogleLoginFormProps = { className?: string };
 
@@ -13,10 +14,7 @@ export function GoogleLoginForm({
       className={clsx('w-full', className)}
       method='POST'
     >
-      <button
-        className='flex w-full items-center justify-center gap-3 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus-visible:ring-transparent'
-        type='submit'
-      >
+      <Button className='w-full gap-3' variant='outline' type='submit'>
         <svg viewBox='0 0 24 24' aria-hidden='true' className='h-5 w-5'>
           <path
             d='M12.0003 4.75C13.7703 4.75 15.3553 5.36002 16.6053 6.54998L20.0303 3.125C17.9502 1.19 15.2353 0 12.0003 0C7.31028 0 3.25527 2.69 1.28027 6.60998L5.27028 9.70498C6.21525 6.86002 8.87028 4.75 12.0003 4.75Z'
@@ -36,7 +34,7 @@ export function GoogleLoginForm({
           />
         </svg>
         <span className='text-sm font-semibold leading-6'>Google</span>
-      </button>
+      </Button>
     </Form>
   );
 }

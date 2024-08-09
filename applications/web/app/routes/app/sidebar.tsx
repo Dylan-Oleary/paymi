@@ -19,8 +19,8 @@ import type { ClientUser } from '~/types';
 
 const navigation = [
   { name: 'Dashboard', href: '/app', icon: HomeIcon },
-  { name: 'Budgets', href: '/budgets', icon: DocumentCurrencyDollarIcon },
-  { name: 'Analytics', href: '/analytics', icon: ChartBarIcon },
+  { name: 'Budgets', href: '/app/budgets', icon: DocumentCurrencyDollarIcon },
+  { name: 'Analytics', href: '/app/analytics', icon: ChartBarIcon },
 ];
 
 export type SidebarProps = { user: ClientUser };

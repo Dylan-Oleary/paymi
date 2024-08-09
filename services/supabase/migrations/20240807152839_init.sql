@@ -33,6 +33,20 @@ VALUES
 ('pets', 'Pet related expenses', 'Pets'),
 ('phone', 'Phone payment', 'Phone');
 
+-- Create budget_default_categories table
+CREATE TABLE public.budget_default_categories (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  budget_id UUID NOT NULL,
+  transaction_category_id UUID NOT NULL,
+  amount_cents INTEGER NOT NULL,
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT (CURRENT_TIMESTAMP AT TIME ZONE 'UTC'),
+  updated_at TIMESTAMP WITH TIME ZONE DEFAULT NULL,
+  -- Constraints
+  CONSTRAINT fk_budget FOREIGN KEY (budget_id) REFERENCES public.budgets(id) ON UPDATE CASCADE ON DELETE CASCADE,
+  CONSTRAINT fk_transaction_category FOREIGN KEY (transaction_category_id) REFERENCES public.transaction_categories(id),
+  CONSTRAINT unique_budget_transaction_category UNIQUE (budget_id, transaction_category_id)
+);
+
 -- Create monthly_budgets table
 CREATE TABLE public.monthly_budgets (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
