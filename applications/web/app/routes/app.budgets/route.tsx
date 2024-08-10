@@ -49,9 +49,11 @@ export default function BudgetsPage(): ReactNode {
       </Heading>
       <div className='grid grid-cols-4 gap-4'>
         {budgets.length > 0 ? (
-          budgets.map(({ description, id, name }) => (
+          budgets.map(({ category_defaults, description, id, name }) => (
             <BudgetCard
               key={id}
+              //@ts-expect-error: Fix when applying types from Supabase
+              categories={category_defaults}
               description={description}
               id={id}
               title={name}
