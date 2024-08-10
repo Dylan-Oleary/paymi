@@ -102,3 +102,34 @@ CREATE TABLE public.shared_budgets (
   CONSTRAINT fk_budget FOREIGN KEY (budget_id) REFERENCES public.budgets(id) ON UPDATE CASCADE ON DELETE CASCADE,
   CONSTRAINT fk_user FOREIGN KEY (user_id) REFERENCES auth.users(id) ON UPDATE CASCADE ON DELETE CASCADE
 );
+
+-- Create create_budget_with_default_categories function
+CREATE TYPE public.budget_default_category_arg AS (
+  amount_cents INTEGER,
+  transaction_category_id UUID
+);
+CREATE OR REPLACE FUNCTION create_budget_with_default_categories(
+  budget_name TEXT,
+  budget_description TEXT,
+  budget_owner_id UUID,
+  default_categories public.budget_default_category_arg[]
+)
+RETURNS UUID AS $$
+DECLARE
+  new_budget_record_id UUID;
+  category public.budget_default_category_arg;
+BEGIN
+  -- Insert into budgets table and set the new_budget_record_id
+  INSERT INTO public.budgets(name, description, owner_id)
+  VALUES (budget_name, budget_description, budget_owner_id)
+  RETURNING id INTO new_budget_record_id;
+  -- Insert into each category default into budget_default_categories table
+  FOREACH category in ARRAY default_categories
+  LOOP
+    INSERT INTO public.budget_default_categories(budget_id, transaction_category_id, amount_cents)
+    VALUES (new_budget_record_id, category.transaction_category_id, category.amount_cents);
+  END LOOP;
+  -- Return the new budget record id
+  RETURN new_budget_record_id;
+END;
+$$ LANGUAGE plpgsql;

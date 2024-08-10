@@ -1,5 +1,6 @@
 export * from './button';
 export * from './card';
+export * from './chart';
 export * from './input-with-label';
 export * from './input';
 export * from './label';
