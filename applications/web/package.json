@@ -9,6 +9,7 @@
     "format:check": "prettier . --check --ignore-path ./../../.prettierignore",
     "format:write": "prettier . --write --ignore-path ./../../.prettierignore",
     "lint:check": "eslint .",
+    "shadcn": "shadcn-ui",
     "start": "remix-serve ./build/server/index.js",
     "typecheck": "tsc"
   },
@@ -16,13 +17,20 @@
     "@headlessui/react": "^2.1.2",
     "@heroicons/react": "^2.1.5",
     "@paymi/supabase": "workspace:*",
+    "@radix-ui/react-label": "^2.1.0",
+    "@radix-ui/react-slot": "^1.1.0",
     "@remix-run/node": "^2.10.3",
     "@remix-run/react": "^2.10.3",
     "@remix-run/serve": "^2.10.3",
+    "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "isbot": "^4.1.0",
+    "lucide-react": "^0.426.0",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "recharts": "^2.12.7",
+    "tailwind-merge": "^2.4.0",
+    "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
     "@remix-run/dev": "^2.10.3",
@@ -33,6 +41,7 @@
     "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-react-hooks": "^4.6.0",
     "postcss": "^8.4.38",
+    "shadcn-ui": "^0.8.0",
     "tailwindcss": "^3.4.4",
     "vite": "^5.1.0",
     "vite-tsconfig-paths": "^4.2.1"
