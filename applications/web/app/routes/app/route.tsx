@@ -30,9 +30,9 @@ export default function AuthenticatedIndexPage() {
   const { user } = useLoaderData<LoaderData>();
 
   return (
-    <div>
+    <div className='h-full'>
       <Sidebar user={user} />
-      <main className='py-10 lg:pl-72'>
+      <main className='h-full py-10 lg:pl-72'>
         <div className='px-4 sm:px-6 lg:px-8'>
           <Outlet />
         </div>

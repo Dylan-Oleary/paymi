@@ -39,7 +39,7 @@ export function BudgetCard({
   });
 
   return (
-    <Link to={`/app/budgets/${id}`}>
+    <Link to={`/app/budgets/${id}/${new Date().getFullYear()}/overview`}>
       <Card className={cn('flex flex-col', className)}>
         <CardHeader>
           <CardTitle>{title}</CardTitle>
