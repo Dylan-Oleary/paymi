@@ -38,7 +38,8 @@ export function useGetMonthlyBudgetTransactions({
         .eq(
           'monthly_budget_categories.monthly_budget_id',
           monthlyBudgetRecordId,
-        );
+        )
+        .order('paid_at', { ascending: false });
 
       if (result.error) {
         throw new Error(result.error.message);
