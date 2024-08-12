@@ -1,4 +1,4 @@
-import { cn } from '~/utils';
+import { cn, formatCentsToDollars } from '~/utils';
 
 import {
   Card,
@@ -33,13 +33,8 @@ export function BudgetCard({
   id,
   title,
 }: BudgetCardProps) {
-  const formatter = new Intl.NumberFormat('en-US', {
-    style: 'currency',
-    currency: 'USD',
-  });
-
   return (
-    <Link to={`/app/budgets/${id}`}>
+    <Link to={`/app/budgets/${id}/${new Date().getFullYear()}/overview`}>
       <Card className={cn('flex flex-col', className)}>
         <CardHeader>
           <CardTitle>{title}</CardTitle>
@@ -49,7 +44,7 @@ export function BudgetCard({
           {categories.map((category) => (
             <div key={category.id} className='flex gap-4'>
               <span>{category.category.label_en}</span>
-              <span>{formatter.format(category.amount_cents / 100)}</span>
+              <span>{formatCentsToDollars(category.amount_cents)}</span>
             </div>
           ))}
         </CardContent>

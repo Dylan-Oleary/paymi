@@ -5,5 +5,6 @@ export * from './chart';
 export * from './input-with-label';
 export * from './input';
 export * from './label';
+export * from './tabs';
 export * from './textarea-with-label';
 export * from './textarea';

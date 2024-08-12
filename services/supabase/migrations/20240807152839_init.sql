@@ -81,6 +81,7 @@ CREATE TABLE public.monthly_budget_transactions (
   paid_by_id UUID NOT NULL,
   logged_by_id UUID NOT NULL,
   paid_at TIMESTAMP WITH TIME ZONE,
+  paid_to TEXT NOT NULL,
   note TEXT,
   monthly_budget_category_id UUID NOT NULL,
   created_at TIMESTAMP WITH TIME ZONE DEFAULT (CURRENT_TIMESTAMP AT TIME ZONE 'UTC'),
@@ -131,5 +132,47 @@ BEGIN
   END LOOP;
   -- Return the new budget record id
   RETURN new_budget_record_id;
+END;
+$$ LANGUAGE plpgsql;
+
+-- Create create_monthly_budget_with_default_categories function
+CREATE TYPE public.budget_default_category_record AS (
+  id UUID,
+  amount_cents INTEGER,
+  transaction_category_id UUID
+);
+CREATE OR REPLACE FUNCTION create_monthly_budget_with_default_categories(
+  budget_record_id UUID,
+  month INTEGER,
+  year INTEGER
+)
+RETURNS UUID AS $$
+DECLARE
+  new_monthly_budget_record_id UUID;
+  budget_default_category_record RECORD;
+BEGIN
+  -- Insert new monthly budget record into monthly_budgets table
+  INSERT INTO public.monthly_budgets(budget_id, month, year)
+  VALUES (budget_record_id, month, year)
+  RETURNING id INTO new_monthly_budget_record_id;
+  -- Iterate over the budget's default categories and insert into monthly_budget_categories
+  FOR budget_default_category_record IN
+    SELECT id, amount_cents, transaction_category_id
+    FROM public.budget_default_categories as bdc
+    WHERE bdc.budget_id = budget_record_id
+  LOOP
+    INSERT INTO public.monthly_budget_categories (
+      monthly_budget_id,
+      transaction_category_id,
+      amount_cents
+    )
+    VALUES (
+      new_monthly_budget_record_id,
+      budget_default_category_record.transaction_category_id,
+      budget_default_category_record.amount_cents
+    );
+  END LOOP;
+  -- Return the new monthly budget record id
+  RETURN new_monthly_budget_record_id;
 END;
 $$ LANGUAGE plpgsql;

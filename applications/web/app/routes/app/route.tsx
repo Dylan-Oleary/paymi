@@ -1,12 +1,17 @@
 import { json, type LoaderFunctionArgs, redirect } from '@remix-run/node';
 import { Outlet, useLoaderData } from '@remix-run/react';
 
-import { getSupabaseServerClient } from '~/supabase';
+import {
+  getSupabaseServerClient,
+  type SupabaseBrowserClientConfig,
+} from '~/supabase';
 import type { ClientUser } from '~/types';
 
 import { Sidebar } from './sidebar';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 type LoaderData = {
+  supabaseClientConfig: SupabaseBrowserClientConfig;
   user: ClientUser;
 };
 
@@ -23,20 +28,30 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
   const { id, email, user_metadata } = data.user;
   const { avatar_url: avatarUrl, full_name: fullName, name } = user_metadata;
 
-  return json<LoaderData>({ user: { id, avatarUrl, email, fullName, name } });
+  return json<LoaderData>({
+    supabaseClientConfig: {
+      SUPABASE_ANON_KEY: process.env.SUPABASE_ANON_KEY,
+      SUPABASE_URL: process.env.SUPABASE_URL,
+    },
+    user: { id, avatarUrl, email, fullName, name },
+  });
 };
+
+const queryClient = new QueryClient();
 
 export default function AuthenticatedIndexPage() {
   const { user } = useLoaderData<LoaderData>();
 
   return (
-    <div>
-      <Sidebar user={user} />
-      <main className='py-10 lg:pl-72'>
-        <div className='px-4 sm:px-6 lg:px-8'>
-          <Outlet />
-        </div>
-      </main>
-    </div>
+    <QueryClientProvider client={queryClient}>
+      <div className='h-full'>
+        <Sidebar user={user} />
+        <main className='h-full py-10 lg:pl-72'>
+          <div className='px-4 sm:px-6 lg:px-8'>
+            <Outlet />
+          </div>
+        </main>
+      </div>
+    </QueryClientProvider>
   );
 }
