@@ -1,10 +1,9 @@
 import { useRouteLoaderData } from '@remix-run/react';
 import { ClientOnly } from 'remix-utils/client-only';
-import { Button, Heading } from '~/components';
+import { Button, Heading, TransactionTable } from '~/components';
 import { useGetMonthlyBudgetTransactions } from '~/lib';
 import { useCreateNewTransaction } from '~/lib/react-query/mutations';
 import type { loader as routeLoader } from '../app.budgets_.$id.$year.$month/route';
-import { TransactionTable } from '~/components/transaction-table/transaction-table';
 
 export default function MonthlyBudgetTransactionsPage() {
   //@ts-expect-error Shut up, this typing is so annoying
