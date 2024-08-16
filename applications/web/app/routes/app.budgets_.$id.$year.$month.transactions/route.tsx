@@ -11,7 +11,10 @@ import {
   UserSelect,
 } from '~/components';
 import { useGetMonthlyBudgetTransactions } from '~/lib';
-import { useCreateNewTransaction } from '~/lib/react-query/mutations';
+import {
+  useCreateNewTransaction,
+  useDeleteTransaction,
+} from '~/lib/react-query/mutations';
 import type { loader as routeLoader } from '../app.budgets_.$id.$year.$month/route';
 import { CheckIcon, PlusIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import { type FormEvent, useState } from 'react';
@@ -39,7 +42,11 @@ export default function MonthlyBudgetTransactionsPage() {
     params: { monthlyBudgetRecordId: monthlyBudget.id },
     supabaseConfig: supabaseClientConfig,
   });
-  const { mutate } = useCreateNewTransaction({
+  const { mutate: createTransaction } = useCreateNewTransaction({
+    params: { monthlyBudgetRecordId: monthlyBudget.id },
+    supabaseConfig: supabaseClientConfig,
+  });
+  const { mutate: deleteTransaction } = useDeleteTransaction({
     params: { monthlyBudgetRecordId: monthlyBudget.id },
     supabaseConfig: supabaseClientConfig,
   });
@@ -59,7 +66,7 @@ export default function MonthlyBudgetTransactionsPage() {
   const onSubmit = (event: FormEvent<HTMLFormElement>) => {
     event?.preventDefault();
 
-    mutate({
+    createTransaction({
       amountCents: Number(newFormData.amount) * 100,
       loggedById: user.id,
       //@ts-expect-error: SHH!
@@ -70,6 +77,10 @@ export default function MonthlyBudgetTransactionsPage() {
       paidById: newFormData!.paidBy?.id,
       paidTo: String(newFormData.paidTo),
     });
+  };
+
+  const onDelete = (id: string) => {
+    deleteTransaction({ id });
   };
 
   return (
@@ -189,7 +200,7 @@ export default function MonthlyBudgetTransactionsPage() {
                 </Button>
               )}
             </div>
-            <TransactionTable data={data ?? []} />
+            <TransactionTable data={data ?? []} onRecordDelete={onDelete} />
           </>
         )}
       </ClientOnly>

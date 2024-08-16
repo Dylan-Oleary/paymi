@@ -2,6 +2,7 @@ import { Fragment } from 'react';
 import { ArrowPathIcon } from '@heroicons/react/20/solid';
 
 import { formatCentsToDollars } from '~/utils';
+import { Button } from '../ui';
 
 export interface TransactionTableProps {
   className?: string;
@@ -19,9 +20,14 @@ export interface TransactionTableProps {
       };
     }[];
   }[];
+  onRecordDelete?: (id: string) => void;
 }
 
-export function TransactionTable({ className, data }: TransactionTableProps) {
+export function TransactionTable({
+  className,
+  data,
+  onRecordDelete,
+}: TransactionTableProps) {
   return (
     <div className={className}>
       <div className='mt-6 overflow-hidden border-t border-gray-100'>
@@ -85,8 +91,19 @@ export function TransactionTable({ className, data }: TransactionTableProps) {
                           </td>
                           <td className='py-5 text-right'>
                             <div className='flex justify-end'>
-                              <div className='text-sm font-medium leading-6 text-indigo-600 hover:text-indigo-500'>
-                                {transactionCategory.label_en}
+                              <div>
+                                <div className='text-sm font-medium leading-6 text-indigo-600 hover:text-indigo-500'>
+                                  {transactionCategory.label_en}
+                                </div>
+                                {onRecordDelete && (
+                                  <Button
+                                    onClick={() => onRecordDelete(id)}
+                                    type='button'
+                                    variant='link'
+                                  >
+                                    Delete
+                                  </Button>
+                                )}
                               </div>
                             </div>
                           </td>
