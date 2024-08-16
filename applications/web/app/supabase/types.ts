@@ -1,4 +1,4 @@
-import { SupabaseClient } from '@paymi/supabase';
+import type { SupabaseClient } from '@paymi/supabase';
 
 export type { SupabaseClient, User, UserMetadata } from '@paymi/supabase';
 
