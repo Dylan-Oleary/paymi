@@ -1,6 +1,7 @@
 {
   "name": "paymi",
   "scripts": {
+    "check": "concurrently -n \"Eslint,Prettier\" -c \"#f000ff,#4deeea\" \"pnpm run lint:check\" \"pnpm run format:check\"",
     "dev:supabase:migration:new": "pnpm --filter @paymi/supabase migration:new",
     "dev:supabase:reset": "pnpm --filter @paymi/supabase db:reset",
     "dev:supabase:start": "pnpm --filter @paymi/supabase start",
@@ -20,6 +21,7 @@
     "@types/node": "^20.14.12",
     "@typescript-eslint/eslint-plugin": "^7.17.0",
     "@typescript-eslint/parser": "^7.17.0",
+    "concurrently": "^8.2.2",
     "dotenv-cli": "^7.4.2",
     "eslint": "^8.38.0",
     "eslint-config-prettier": "^9.1.0",
@@ -27,7 +29,6 @@
     "eslint-plugin-import": "^2.29.1",
     "eslint-plugin-prettier": "^5.2.1",
     "husky": "^9.1.3",
-    "lint-staged": "^15.2.7",
     "prettier": "^3.3.3",
     "typescript": "^5.5.4"
   },
