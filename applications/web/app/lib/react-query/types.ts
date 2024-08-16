@@ -1,5 +1,5 @@
-import type { SupabaseBrowserClientOpts } from '~/supabase/.client';
+import type { SupabaseBrowserConnectionOpts } from '~/supabase/.client';
 
 export interface RQOperationWithSupabase {
-  supabaseOpts: SupabaseBrowserClientOpts;
+  supabaseOpts: SupabaseBrowserConnectionOpts;
 }

@@ -5,14 +5,15 @@ import type {
   SupabaseConnectionConfig,
 } from '~/supabase';
 
-export interface SupabaseBrowserClientOpts {
+interface SupabaseBrowserConnectionReturn
+  extends SupabaseConnectionBaseReturn {}
+
+export interface SupabaseBrowserConnectionOpts {
   config: SupabaseConnectionConfig;
 }
-export interface SupabaseBrowserClientReturn
-  extends SupabaseConnectionBaseReturn {}
 
 export function getSupabaseBrowserConnection({
   config: { SUPABASE_ANON_KEY, SUPABASE_URL },
-}: SupabaseBrowserClientOpts): SupabaseBrowserClientReturn {
+}: SupabaseBrowserConnectionOpts): SupabaseBrowserConnectionReturn {
   return { supabase: createBrowserClient(SUPABASE_URL, SUPABASE_ANON_KEY) };
 }
