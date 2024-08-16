@@ -1,3 +1,3 @@
-export * from './browser-client';
-export * from './server-client';
+export * from './connection.client';
+export * from './connection.server';
 export * from './types';

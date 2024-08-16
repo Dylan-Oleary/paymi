@@ -1,7 +1,7 @@
+import { CheckIcon } from '@heroicons/react/24/outline';
 import type { ActionFunctionArgs, LoaderFunctionArgs } from '@remix-run/node';
 import { json, redirect, useFetcher, useLoaderData } from '@remix-run/react';
 import { type ReactNode, useState } from 'react';
-import { CheckIcon } from '@heroicons/react/24/outline';
 
 import {
   Badge,
@@ -12,8 +12,7 @@ import {
   Label,
   TextareaWithLabel,
 } from '~/components';
-
-import { getSupabaseServerClient } from '~/supabase';
+import { getSupabaseServerConnection } from '~/supabase';
 
 type LoaderData = {
   categories: {
@@ -24,19 +23,17 @@ type LoaderData = {
   }[];
 };
 
-export const loader = async ({ request }: LoaderFunctionArgs) => {
-  const headers = new Headers();
-  const supabase = getSupabaseServerClient({ headers, request });
+export async function loader({ request }: LoaderFunctionArgs) {
+  const { headers, supabase } = getSupabaseServerConnection({ request });
   const { data: categories } = await supabase
     .from('transaction_categories')
     .select('id, name, label_en, description_en');
 
   return json<LoaderData>({ categories: categories ?? [] }, { headers });
-};
+}
 
-export const action = async ({ request }: ActionFunctionArgs) => {
-  const headers = new Headers();
-  const supabase = getSupabaseServerClient({ headers, request });
+export async function action({ request }: ActionFunctionArgs) {
+  const { headers, supabase } = getSupabaseServerConnection({ request });
   const {
     data: { user },
   } = await supabase.auth.getUser();
@@ -90,7 +87,7 @@ export const action = async ({ request }: ActionFunctionArgs) => {
   }
 
   return redirect('/app/budgets', { headers });
-};
+}
 
 export default function CreateNewBudgetPage(): ReactNode {
   const { categories = [] } = useLoaderData<LoaderData>();

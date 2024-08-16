@@ -1,9 +1,9 @@
 import { type LoaderFunctionArgs, redirect } from '@remix-run/node';
-import { getSupabaseServerClient } from '~/supabase';
+
+import { getSupabaseServerConnection } from '~/supabase';
 
 export const action = async ({ request }: LoaderFunctionArgs) => {
-  const headers = new Headers();
-  const supabase = getSupabaseServerClient({ headers, request });
+  const { headers, supabase } = getSupabaseServerConnection({ request });
 
   await supabase.auth.signOut({ scope: 'local' });
 

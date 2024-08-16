@@ -1,12 +1,11 @@
 import { type LoaderFunctionArgs, redirect } from '@remix-run/node';
 
-import { getSupabaseServerClient } from '~/supabase';
+import { getSupabaseServerConnection } from '~/supabase';
+
 import { GoogleLoginForm } from './google-login-form';
 
-export const loader = async ({ request }: LoaderFunctionArgs) => {
-  const headers = new Headers();
-  const supabase = getSupabaseServerClient({ headers, request });
-
+export async function loader({ request }: LoaderFunctionArgs) {
+  const { headers, supabase } = getSupabaseServerConnection({ request });
   const { data } = await supabase.auth.getUser();
 
   if (data.user) {
@@ -14,7 +13,7 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
   }
 
   return null;
-};
+}
 
 export default function LoginPage() {
   return (

@@ -1,9 +1,9 @@
-import { ActionFunctionArgs, redirect } from '@remix-run/node';
-import { getSupabaseServerClient } from '~/supabase';
+import { type ActionFunctionArgs, redirect } from '@remix-run/node';
 
-export const action = async ({ request }: ActionFunctionArgs) => {
-  const headers = new Headers();
-  const supabase = getSupabaseServerClient({ headers, request });
+import { getSupabaseServerConnection } from '~/supabase';
+
+export async function action({ request }: ActionFunctionArgs) {
+  const { headers, supabase } = getSupabaseServerConnection({ request });
 
   const signInResult = await supabase.auth.signInWithOAuth({
     provider: 'google',
@@ -15,4 +15,4 @@ export const action = async ({ request }: ActionFunctionArgs) => {
   }
 
   return;
-};
+}
