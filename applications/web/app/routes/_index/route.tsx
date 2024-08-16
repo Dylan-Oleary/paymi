@@ -1,7 +1,7 @@
 import type { LoaderFunctionArgs } from '@remix-run/node';
 import { redirect } from '@remix-run/react';
 
-import { getSupabaseServerConnection } from '~/supabase';
+import { getSupabaseServerConnection } from '~/supabase/.server';
 
 export async function loader({ request }: LoaderFunctionArgs) {
   const { supabase } = getSupabaseServerConnection({ request });

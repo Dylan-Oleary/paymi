@@ -4,7 +4,7 @@ import type { ReactNode } from 'react';
 
 import { BudgetCard, Button, Heading } from '~/components';
 
-import { getSupabaseServerConnection } from '~/supabase';
+import { getSupabaseServerConnection } from '~/supabase/.server';
 
 export async function loader({ request }: LoaderFunctionArgs) {
   const { headers, supabase } = getSupabaseServerConnection({ request });

@@ -1,4 +1,4 @@
-import type { SupabaseBrowserClientOpts } from '~/supabase';
+import type { SupabaseBrowserClientOpts } from '~/supabase/.client';
 import type { ClientUser } from '~/types';
 
 export interface RootAppLoaderData {

@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 
 import type { TransactionTableProps } from '~/components';
-import { getSupabaseBrowserConnection } from '~/supabase';
+import { getSupabaseBrowserConnection } from '~/supabase/.client';
 
 import { RQOperationWithSupabase } from '../types';
 

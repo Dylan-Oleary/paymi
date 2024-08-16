@@ -2,7 +2,7 @@ import { json, type LoaderFunctionArgs, redirect } from '@remix-run/node';
 import { Outlet, useLoaderData } from '@remix-run/react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
-import { getSupabaseServerConnection } from '~/supabase';
+import { getSupabaseServerConnection } from '~/supabase/.server';
 
 import { Sidebar } from './sidebar';
 import type { RootAppLoaderData } from './types';

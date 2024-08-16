@@ -1,6 +1,6 @@
 import { type LoaderFunctionArgs, redirect } from '@remix-run/node';
 
-import { getSupabaseServerConnection } from '~/supabase';
+import { getSupabaseServerConnection } from '~/supabase/.server';
 
 import { GoogleLoginForm } from './google-login-form';
 

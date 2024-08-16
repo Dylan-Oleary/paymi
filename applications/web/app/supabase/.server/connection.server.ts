@@ -4,7 +4,7 @@ import {
   serializeCookieHeader,
 } from '@paymi/supabase';
 
-import type { SupabaseConnectionBaseReturn } from './types';
+import type { SupabaseConnectionBaseReturn } from '~/supabase';
 
 export interface SupabaseServerClientOpts {
   headers?: Headers;

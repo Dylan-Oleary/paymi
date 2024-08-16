@@ -1,6 +1,6 @@
 import { json, type LoaderFunctionArgs, redirect } from '@remix-run/node';
 
-import { getSupabaseServerConnection } from '~/supabase';
+import { getSupabaseServerConnection } from '~/supabase/.server';
 
 export type MonthlyBudgetLoaderData = {
   monthlyBudget: {

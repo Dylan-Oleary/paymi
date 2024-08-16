@@ -3,7 +3,7 @@ import { createBrowserClient } from '@paymi/supabase';
 import type {
   SupabaseConnectionBaseReturn,
   SupabaseConnectionConfig,
-} from './types';
+} from '~/supabase';
 
 export interface SupabaseBrowserClientOpts {
   config: SupabaseConnectionConfig;

@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import { getSupabaseBrowserConnection } from '~/supabase';
+import { getSupabaseBrowserConnection } from '~/supabase/.client';
 
 import type { RQOperationWithSupabase } from '../types';
 

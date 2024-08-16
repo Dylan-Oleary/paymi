@@ -12,7 +12,7 @@ import {
   Label,
   TextareaWithLabel,
 } from '~/components';
-import { getSupabaseServerConnection } from '~/supabase';
+import { getSupabaseServerConnection } from '~/supabase/.server';
 
 type LoaderData = {
   categories: {

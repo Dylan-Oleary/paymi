@@ -1,6 +1,6 @@
 import { redirect, type LoaderFunctionArgs } from '@remix-run/node';
 
-import { getSupabaseServerConnection } from '~/supabase';
+import { getSupabaseServerConnection } from '~/supabase/.server';
 
 export async function loader({ request }: LoaderFunctionArgs) {
   const requestUrl = new URL(request.url);

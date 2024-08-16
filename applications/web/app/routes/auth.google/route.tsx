@@ -1,6 +1,6 @@
 import { type ActionFunctionArgs, redirect } from '@remix-run/node';
 
-import { getSupabaseServerConnection } from '~/supabase';
+import { getSupabaseServerConnection } from '~/supabase/.server';
 
 export async function action({ request }: ActionFunctionArgs) {
   const { headers, supabase } = getSupabaseServerConnection({ request });

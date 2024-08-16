@@ -10,7 +10,6 @@ import {
 } from '@headlessui/react';
 import {
   Bars3Icon,
-  ChartBarIcon,
   DocumentCurrencyDollarIcon,
   HomeIcon,
   XMarkIcon,
@@ -21,7 +20,6 @@ import { Button } from '~/components';
 const navigation = [
   { name: 'Dashboard', href: '/app', icon: HomeIcon },
   { name: 'Budgets', href: '/app/budgets', icon: DocumentCurrencyDollarIcon },
-  { name: 'Analytics', href: '/app/analytics', icon: ChartBarIcon },
 ];
 
 export type SidebarProps = { user: ClientUser };
