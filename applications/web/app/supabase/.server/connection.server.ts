@@ -6,12 +6,12 @@ import {
 
 import type { SupabaseConnectionBaseReturn } from '~/supabase';
 
-export interface SupabaseServerClientOpts {
+interface SupabaseServerConnectionOpts {
   headers?: Headers;
   request: Request;
 }
-export interface SupabaseServerClientReturn
-  extends SupabaseConnectionBaseReturn {
+
+interface SupabaseServerConnectionReturn extends SupabaseConnectionBaseReturn {
   headers: Headers;
   request: Request;
 }
@@ -19,7 +19,7 @@ export interface SupabaseServerClientReturn
 export function getSupabaseServerConnection({
   headers = new Headers(),
   request,
-}: SupabaseServerClientOpts): SupabaseServerClientReturn {
+}: SupabaseServerConnectionOpts): SupabaseServerConnectionReturn {
   const supabase = createServerClient(
     process.env.SUPABASE_URL,
     process.env.SUPABASE_ANON_KEY,
