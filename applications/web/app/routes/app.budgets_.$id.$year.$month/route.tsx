@@ -25,7 +25,7 @@ export async function loader({ params, request }: LoaderFunctionArgs) {
     data: { user },
   } = await supabase.auth.getUser();
 
-  if (!user) return redirect('/logout');
+  if (!user) return redirect('/login');
 
   const month = parseInt(params.month ?? '0');
   const year = parseInt(params.year ?? '0');
