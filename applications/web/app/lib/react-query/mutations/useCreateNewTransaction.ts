@@ -1,12 +1,11 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import {
-  getSupabaseBrowserConnection,
-  type SupabaseBrowserClientOpts,
-} from '~/supabase';
 
-interface UseCreateNewTransactionsArgs {
+import { getSupabaseBrowserConnection } from '~/supabase';
+
+import type { RQOperationWithSupabase } from '../types';
+
+interface UseCreateNewTransactionsArgs extends RQOperationWithSupabase {
   params: { monthlyBudgetRecordId: string };
-  supabaseOpts: SupabaseBrowserClientOpts;
 }
 
 interface MutationFunctionArgs {

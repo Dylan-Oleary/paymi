@@ -1,25 +1,22 @@
 import { useQuery } from '@tanstack/react-query';
-import { TransactionTableProps } from '~/components/transaction-table/transaction-table';
-import {
-  getSupabaseBrowserClient,
-  type SupabaseBrowserClientConfig,
-} from '~/supabase';
 
-interface UseGetMonthlyBudgetTransactionsArgs {
-  params: {
-    monthlyBudgetRecordId: string;
-  };
-  supabaseConfig: SupabaseBrowserClientConfig;
+import type { TransactionTableProps } from '~/components';
+import { getSupabaseBrowserConnection } from '~/supabase';
+
+import { RQOperationWithSupabase } from '../types';
+
+interface UseGetMonthlyBudgetTransactionsArgs extends RQOperationWithSupabase {
+  params: { monthlyBudgetRecordId: string };
 }
 
 export function useGetMonthlyBudgetTransactions({
   params: { monthlyBudgetRecordId },
-  supabaseConfig,
+  supabaseOpts,
 }: UseGetMonthlyBudgetTransactionsArgs) {
   return useQuery({
     queryKey: [`${monthlyBudgetRecordId}-transactions`],
     queryFn: async () => {
-      const supabase = getSupabaseBrowserClient(supabaseConfig);
+      const { supabase } = getSupabaseBrowserConnection(supabaseOpts);
       const result = await supabase
         .from('monthly_budget_transactions')
         .select(
