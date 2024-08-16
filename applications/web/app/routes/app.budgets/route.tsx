@@ -2,13 +2,12 @@ import type { LoaderFunctionArgs } from '@remix-run/node';
 import { json, Link, redirect, useLoaderData } from '@remix-run/react';
 import type { ReactNode } from 'react';
 
-import { Button, BudgetCard, Heading } from '~/components';
+import { BudgetCard, Button, Heading } from '~/components';
 
-import { getSupabaseServerClient } from '~/supabase';
+import { getSupabaseServerConnection } from '~/supabase/.server';
 
-export const loader = async ({ request }: LoaderFunctionArgs) => {
-  const headers = new Headers();
-  const supabase = getSupabaseServerClient({ headers, request });
+export async function loader({ request }: LoaderFunctionArgs) {
+  const { headers, supabase } = getSupabaseServerConnection({ request });
   const {
     data: { user },
   } = await supabase.auth.getUser();
@@ -37,7 +36,7 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
     .eq('owner_id', user.id);
 
   return json({ budgets: budgets ?? [] }, { headers });
-};
+}
 
 export default function BudgetsPage(): ReactNode {
   const { budgets = [] } = useLoaderData<typeof loader>();

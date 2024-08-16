@@ -1,5 +1,7 @@
 import { Outlet, useParams } from '@remix-run/react';
+
 import { Heading } from '~/components';
+
 import { Sidebar } from './sidebar';
 
 export default function YearlyBudgetPage() {

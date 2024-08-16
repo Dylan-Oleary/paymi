@@ -1,12 +1,10 @@
 import type { LoaderFunctionArgs } from '@remix-run/node';
 import { redirect } from '@remix-run/react';
 
-import { getSupabaseServerClient } from '~/supabase';
+import { getSupabaseServerConnection } from '~/supabase/.server';
 
-export const loader = async ({ request }: LoaderFunctionArgs) => {
-  const headers = new Headers();
-  const supabase = getSupabaseServerClient({ headers, request });
-
+export async function loader({ request }: LoaderFunctionArgs) {
+  const { supabase } = getSupabaseServerConnection({ request });
   const { data, error } = await supabase.auth.getUser();
 
   if (error || !data.user) {
@@ -14,4 +12,4 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
   }
 
   return redirect('/app');
-};
+}

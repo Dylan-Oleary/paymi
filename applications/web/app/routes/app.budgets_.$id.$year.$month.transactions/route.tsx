@@ -1,5 +1,8 @@
+import { CheckIcon, PlusIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import { useRouteLoaderData } from '@remix-run/react';
+import { type FormEvent, useState } from 'react';
 import { ClientOnly } from 'remix-utils/client-only';
+
 import {
   Button,
   DatePicker,
@@ -10,19 +13,19 @@ import {
   TransactionTable,
   UserSelect,
 } from '~/components';
-import { useGetMonthlyBudgetTransactions } from '~/lib';
 import {
   useCreateNewTransaction,
   useDeleteTransaction,
-} from '~/lib/react-query/mutations';
-import type { loader as routeLoader } from '../app.budgets_.$id.$year.$month/route';
-import { CheckIcon, PlusIcon, XMarkIcon } from '@heroicons/react/24/outline';
-import { type FormEvent, useState } from 'react';
-import { ClientUser } from '~/types';
+  useGetMonthlyBudgetTransactions,
+} from '~/lib';
+import type { RootAppLoaderData } from '~/routes/app/types';
+import type { loader as routeLoader } from '~/routes/app.budgets_.$id.$year.$month/route';
+import type { ClientUser } from '~/types';
 
 export default function MonthlyBudgetTransactionsPage() {
-  //@ts-expect-error Shut up, this typing is so annoying
-  const { supabaseClientConfig, user } = useRouteLoaderData('routes/app');
+  const { supabaseOpts, user } = useRouteLoaderData(
+    'routes/app',
+  ) as RootAppLoaderData;
   //@ts-expect-error Shut up, this typing is so annoying
   const { monthlyBudget } = useRouteLoaderData<typeof routeLoader>(
     'routes/app.budgets_.$id.$year.$month',
@@ -40,15 +43,15 @@ export default function MonthlyBudgetTransactionsPage() {
 
   const { data } = useGetMonthlyBudgetTransactions({
     params: { monthlyBudgetRecordId: monthlyBudget.id },
-    supabaseConfig: supabaseClientConfig,
+    supabaseOpts,
   });
   const { mutate: createTransaction } = useCreateNewTransaction({
     params: { monthlyBudgetRecordId: monthlyBudget.id },
-    supabaseConfig: supabaseClientConfig,
+    supabaseOpts,
   });
   const { mutate: deleteTransaction } = useDeleteTransaction({
     params: { monthlyBudgetRecordId: monthlyBudget.id },
-    supabaseConfig: supabaseClientConfig,
+    supabaseOpts,
   });
 
   const closeNewForm = () => {

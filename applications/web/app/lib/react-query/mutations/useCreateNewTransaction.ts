@@ -1,12 +1,11 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import {
-  getSupabaseBrowserClient,
-  type SupabaseBrowserClientConfig,
-} from '~/supabase';
 
-interface UseCreateNewTransactionsArgs {
+import { getSupabaseBrowserConnection } from '~/supabase/.client';
+
+import type { RQOperationWithSupabase } from '../types';
+
+interface UseCreateNewTransactionsArgs extends RQOperationWithSupabase {
   params: { monthlyBudgetRecordId: string };
-  supabaseConfig: SupabaseBrowserClientConfig;
 }
 
 interface MutationFunctionArgs {
@@ -21,7 +20,7 @@ interface MutationFunctionArgs {
 
 export function useCreateNewTransaction({
   params: { monthlyBudgetRecordId },
-  supabaseConfig,
+  supabaseOpts,
 }: UseCreateNewTransactionsArgs) {
   const client = useQueryClient();
 
@@ -35,7 +34,7 @@ export function useCreateNewTransaction({
       monthlyBudgetCategoryId,
       note,
     }) => {
-      const supabase = getSupabaseBrowserClient(supabaseConfig);
+      const { supabase } = getSupabaseBrowserConnection(supabaseOpts);
       const result = await supabase.from('monthly_budget_transactions').insert({
         amount_cents: amountCents,
         paid_at: paidAt,

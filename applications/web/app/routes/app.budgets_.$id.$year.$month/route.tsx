@@ -1,5 +1,6 @@
 import { json, type LoaderFunctionArgs, redirect } from '@remix-run/node';
-import { getSupabaseServerClient } from '~/supabase';
+
+import { getSupabaseServerConnection } from '~/supabase/.server';
 
 export type MonthlyBudgetLoaderData = {
   monthlyBudget: {
@@ -18,9 +19,8 @@ export type MonthlyBudgetLoaderData = {
   };
 };
 
-export const loader = async ({ params, request }: LoaderFunctionArgs) => {
-  const headers = new Headers();
-  const supabase = getSupabaseServerClient({ headers, request });
+export async function loader({ params, request }: LoaderFunctionArgs) {
+  const { headers, supabase } = getSupabaseServerConnection({ request });
   const {
     data: { user },
   } = await supabase.auth.getUser();
@@ -73,4 +73,4 @@ export const loader = async ({ params, request }: LoaderFunctionArgs) => {
   }
 
   return json({ monthlyBudget: result.data[0] });
-};
+}

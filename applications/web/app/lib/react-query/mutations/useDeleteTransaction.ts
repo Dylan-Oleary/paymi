@@ -1,23 +1,22 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import {
-  getSupabaseBrowserClient,
-  type SupabaseBrowserClientConfig,
-} from '~/supabase';
 
-interface UseDeleteTransactionArgs {
+import { getSupabaseBrowserConnection } from '~/supabase/.client';
+
+import type { RQOperationWithSupabase } from '../types';
+
+interface UseDeleteTransactionArgs extends RQOperationWithSupabase {
   params: { monthlyBudgetRecordId: string };
-  supabaseConfig: SupabaseBrowserClientConfig;
 }
 
 export function useDeleteTransaction({
   params: { monthlyBudgetRecordId },
-  supabaseConfig,
+  supabaseOpts,
 }: UseDeleteTransactionArgs) {
   const client = useQueryClient();
 
   return useMutation<unknown, Error, { id: string }>({
     mutationFn: async ({ id }) => {
-      const supabase = getSupabaseBrowserClient(supabaseConfig);
+      const { supabase } = getSupabaseBrowserConnection(supabaseOpts);
       const result = await supabase
         .from('monthly_budget_transactions')
         .delete()
