@@ -1,5 +1,6 @@
 import {
   createServerClient,
+  type Database,
   parseCookieHeader,
   serializeCookieHeader,
 } from '@paymi/supabase';
@@ -11,16 +12,17 @@ interface SupabaseServerConnectionOpts {
   request: Request;
 }
 
-interface SupabaseServerConnectionReturn extends SupabaseConnectionBaseReturn {
+interface SupabaseServerConnectionReturn<T>
+  extends SupabaseConnectionBaseReturn<T> {
   headers: Headers;
   request: Request;
 }
 
-export function getSupabaseServerConnection({
+export function getSupabaseServerConnection<T = Database>({
   headers = new Headers(),
   request,
-}: SupabaseServerConnectionOpts): SupabaseServerConnectionReturn {
-  const supabase = createServerClient(
+}: SupabaseServerConnectionOpts): SupabaseServerConnectionReturn<T> {
+  const supabase = createServerClient<T>(
     process.env.SUPABASE_URL,
     process.env.SUPABASE_ANON_KEY,
     {

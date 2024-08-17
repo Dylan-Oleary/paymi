@@ -21,7 +21,7 @@ export interface BudgetCardProps {
     };
   }[];
   className?: string;
-  description?: string;
+  description?: string | null;
   id: string;
   title: string;
 }

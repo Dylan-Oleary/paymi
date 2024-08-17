@@ -1,5 +1,9 @@
 import { CheckIcon } from '@heroicons/react/24/outline';
-import type { ActionFunctionArgs, LoaderFunctionArgs } from '@remix-run/node';
+import {
+  TypedResponse,
+  type ActionFunctionArgs,
+  type LoaderFunctionArgs,
+} from '@remix-run/node';
 import { json, redirect, useFetcher, useLoaderData } from '@remix-run/react';
 import { type ReactNode, useState } from 'react';
 
@@ -12,6 +16,7 @@ import {
   Label,
   TextareaWithLabel,
 } from '~/components';
+import { authenticatedLoader } from '~/server';
 import { getSupabaseServerConnection } from '~/supabase/.server';
 
 type LoaderData = {
@@ -23,13 +28,17 @@ type LoaderData = {
   }[];
 };
 
-export async function loader({ request }: LoaderFunctionArgs) {
-  const { headers, supabase } = getSupabaseServerConnection({ request });
-  const { data: categories } = await supabase
-    .from('transaction_categories')
-    .select('id, name, label_en, description_en');
+export async function loader(args: LoaderFunctionArgs) {
+  return authenticatedLoader<TypedResponse<LoaderData>>(
+    args,
+    async ({ headers, supabase }) => {
+      const { data: categories } = await supabase
+        .from('transaction_categories')
+        .select('id, name, label_en, description_en');
 
-  return json<LoaderData>({ categories: categories ?? [] }, { headers });
+      return json({ categories: categories ?? [] }, { headers });
+    },
+  );
 }
 
 export async function action({ request }: ActionFunctionArgs) {
@@ -75,8 +84,8 @@ export async function action({ request }: ActionFunctionArgs) {
   const { error } = await supabase.rpc(
     'create_budget_with_default_categories',
     {
-      budget_description: formData.get('description'),
-      budget_name: formData.get('name'),
+      budget_description: formData.get('description') as string,
+      budget_name: formData.get('name') as string,
       budget_owner_id: user.id,
       default_categories: categories,
     },

@@ -11,17 +11,6 @@ This package contains the Paymi [Supabase](https://supabase.com/) service.
 
 Supabase is run locally using [Docker](https://www.docker.com/). If you don't have Docker installed, you can find installation help [here](https://www.docker.com/get-started/).
 
-### Supabase CLI
-
-In order to control Supabase, you'll need to download the [Supabase CLI](https://supabase.com/docs/guides/cli/getting-started#installing-the-supabase-cli). This will allow the configured `pnpm` scripts to start and stop the Supabase stack.
-
-> [!TIP]  
-> For a full list of Supase CLI commands, run the following
->
-> ```bash
-> supabase --help
-> ```
-
 ### Environment variables
 
 This project uses Google OAuth for user authentication. Supabase relies on the following environment variables in order for Google OAuth to work as expected:
