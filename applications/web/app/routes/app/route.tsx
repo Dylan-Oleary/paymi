@@ -40,7 +40,7 @@ export default function AuthenticatedIndexPage() {
     <QueryClientProvider client={queryClient}>
       <div className='h-full'>
         <Sidebar user={user} />
-        <main className='h-full py-10 lg:pl-72'>
+        <main className='h-full py-10 lg:pl-20'>
           <div className='px-4 sm:px-6 lg:px-8'>
             <Outlet />
           </div>

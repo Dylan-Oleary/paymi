@@ -1,5 +1,4 @@
 import { Link, useLocation } from '@remix-run/react';
-import { cn } from '~/utils';
 import { type ReactNode, useState } from 'react';
 
 import {
@@ -15,6 +14,7 @@ import {
   XMarkIcon,
 } from '@heroicons/react/24/outline';
 import type { ClientUser } from '~/types';
+import { cn } from '~/utils';
 import { Button } from '~/components';
 
 const navigation = [
@@ -80,6 +80,7 @@ export function Sidebar({ user }: SidebarProps): ReactNode {
                                 : 'text-gray-400 hover:bg-gray-800 hover:text-white',
                               'group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6',
                             )}
+                            onClick={() => setSidebarOpen(false)}
                             to={item.href}
                           >
                             <item.icon
@@ -116,57 +117,53 @@ export function Sidebar({ user }: SidebarProps): ReactNode {
           />
         </Link>
       </div>
-
       {/* Desktop */}
-      <div className='hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-72 lg:flex-col'>
-        <div className='flex grow flex-col gap-y-5 overflow-y-auto bg-gray-900 px-6'>
-          <div className='flex h-16 shrink-0 items-center'>
-            <h2 className='font-extrabold italic text-indigo-600 text-3xl tracking-tighter'>
-              Paymi
-            </h2>
-          </div>
-          <nav className='flex flex-1 flex-col'>
-            <ul className='flex flex-1 flex-col gap-y-7'>
-              <li>
-                <ul className='-mx-2 space-y-1'>
-                  {navigation.map((item) => (
-                    <li key={item.name}>
-                      <a
-                        className={cn(
-                          pathname === item.href
-                            ? 'bg-gray-800 text-white'
-                            : 'text-gray-400 hover:bg-gray-800 hover:text-white',
-                          'group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6',
-                        )}
-                        href={item.href}
-                      >
-                        <item.icon
-                          aria-hidden='true'
-                          className='h-6 w-6 shrink-0'
-                        />
-                        {item.name}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </li>
-              <li className='-mx-6 mt-auto'>
-                <Link
-                  className='flex items-center gap-x-4 px-6 py-3 text-sm font-semibold leading-6 text-white hover:bg-gray-800'
-                  to='/app/profile'
-                >
-                  <img
-                    alt='Your avatar'
-                    className='h-8 w-8 rounded-full bg-gray-800'
-                    src={user.avatarUrl}
-                  />
-                  <span className='sr-only'>Your profile</span>
-                  <span aria-hidden='true'>{user.name}</span>
-                </Link>
-              </li>
-            </ul>
-          </nav>
+      <div className='hidden lg:fixed lg:inset-y-0 lg:left-0 lg:z-50 lg:flex lg:flex-col lg:w-20 lg:overflow-y-auto lg:bg-gray-900'>
+        <div className='flex h-16 shrink-0 items-center justify-center'>
+          <h2 className='font-extrabold italic text-indigo-600 text-3xl tracking-tighter'>
+            P
+          </h2>
         </div>
+        <nav className='flex flex-1 flex-col'>
+          <ul className='flex flex-1 flex-col items-center'>
+            <li>
+              <ul className='-mx-2 space-y-1'>
+                {navigation.map((item) => (
+                  <li key={item.name}>
+                    <Link
+                      className={cn(
+                        pathname === item.href
+                          ? 'bg-gray-800 text-white'
+                          : 'text-gray-400 hover:bg-gray-800 hover:text-white',
+                        'group flex gap-x-3 rounded-md p-3 text-sm font-semibold leading-6',
+                      )}
+                      to={item.href}
+                    >
+                      <item.icon
+                        aria-hidden='true'
+                        className='h-6 w-6 shrink-0'
+                      />
+                      <span className='sr-only'>{item.name}</span>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </li>
+            <li className='-mx-6 mt-auto'>
+              <Link
+                className='flex items-center gap-x-4 px-6 py-3 text-sm font-semibold leading-6 text-white hover:bg-gray-800'
+                to='/app/profile'
+              >
+                <img
+                  alt='Your avatar'
+                  className='h-8 w-8 rounded-full bg-gray-800'
+                  src={user.avatarUrl}
+                />
+                <span className='sr-only'>Your profile</span>
+              </Link>
+            </li>
+          </ul>
+        </nav>
       </div>
     </>
   );
