@@ -6,10 +6,10 @@ This package contains the Paymi web application. This application uses [Remix](h
 
 ### Environment variables
 
-For environment variables prefixed with `SUPBASE_`, refer to the output of the command `pnpm dev:supabase:start`.
+For environment variables prefixed with `SUPBASE_`, refer to the output of the command `pnpm supabase:start`.
 
 ```bash
-// pnpm dev:supabase:start
+// pnpm supabase:start
 Started supabase local development setup.
 
 API URL: http://127.0.0.1:54321
@@ -38,5 +38,5 @@ SUPABASE_URL=API URL (Output -> API_URL)
 To start the project in development mode, run the following commands after starting Supabase.
 
 ```bash
-pnpm dev:web
+pnpm web:dev
 ```

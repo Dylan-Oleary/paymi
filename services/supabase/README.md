@@ -44,16 +44,27 @@ Follow the steps outlined in [Supabase – Login with Google](https://supabase.
 > Add the value of `SUPABASE_AUTH_SERVER_REDIRECT_URL` as a record under
 > 'Authorized redirect URIs'. This value is the Supabase endpoint that Google will redirect to after authentication.
 
+### Typescript support
+
+To generate types based off of the Supabase relational DB schema, run the following command.
+
+```bash
+pnpm supabase:generate:types
+```
+
+> [!NOTE]
+> This command will output the generated types to `src/generated/types.ts`
+
 ## Running Supabase
 
 In order to start Supabase, run the following command.
 
 ```bash
-pnpm dev:supabase:start
+pnpm supabase:start
 ```
 
 To stop Supabase, run the following command.
 
 ```bash
-pnpm dev:supabase:stop
+pnpm supabase:stop
 ```

@@ -2,15 +2,16 @@
   "name": "paymi",
   "scripts": {
     "check": "concurrently -n \"Eslint,Prettier\" -c \"#f000ff,#4deeea\" \"pnpm run lint:check\" \"pnpm run format:check\"",
-    "dev:supabase:migration:new": "pnpm --filter @paymi/supabase migration:new",
-    "dev:supabase:reset": "pnpm --filter @paymi/supabase db:reset",
-    "dev:supabase:start": "pnpm --filter @paymi/supabase start",
-    "dev:supabase:stop": "pnpm --filter @paymi/supabase stop",
-    "dev:web": "pnpm --filter @paymi/web dev",
     "format:check": "pnpm --recursive format:check",
     "format:write": "pnpm --recursive format:write",
     "lint:check": "pnpm --recursive lint:check",
     "prepare": "husky",
+    "supabase:generate:types": "pnpm --filter @paymi/supabase generate:types",
+    "supabase:migration:new": "pnpm --filter @paymi/supabase migration:new",
+    "supabase:reset": "pnpm --filter @paymi/supabase db:reset",
+    "supabase:start": "pnpm --filter @paymi/supabase start",
+    "supabase:stop": "pnpm --filter @paymi/supabase stop",
+    "web:dev": "pnpm --filter @paymi/web dev",
     "web:shadcn": "pnpm --filter @paymi/web shadcn"
   },
   "engines": {
