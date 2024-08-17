@@ -1,23 +1,16 @@
 import type { LoaderFunctionArgs } from '@remix-run/node';
-import { json, Link, redirect, useLoaderData } from '@remix-run/react';
+import { json, Link, useLoaderData } from '@remix-run/react';
 import type { ReactNode } from 'react';
 
 import { BudgetCard, Button, Heading } from '~/components';
+import { authenticatedLoader } from '~/server';
 
-import { getSupabaseServerConnection } from '~/supabase/.server';
-
-export async function loader({ request }: LoaderFunctionArgs) {
-  const { headers, supabase } = getSupabaseServerConnection({ request });
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-
-  if (!user) return redirect('/login');
-
-  const { data: budgets = [] } = await supabase
-    .from('budgets')
-    .select(
-      `
+export async function loader(args: LoaderFunctionArgs) {
+  return authenticatedLoader(args, async ({ headers, supabase, user }) => {
+    const { data: budgets = [] } = await supabase
+      .from('budgets')
+      .select(
+        `
       id,
       name,
       description,
@@ -32,10 +25,11 @@ export async function loader({ request }: LoaderFunctionArgs) {
         )
       )
       `,
-    )
-    .eq('owner_id', user.id);
+      )
+      .eq('owner_id', user.id);
 
-  return json({ budgets: budgets ?? [] }, { headers });
+    return json({ budgets: budgets ?? [] }, { headers });
+  });
 }
 
 export default function BudgetsPage(): ReactNode {
